@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace ServiceLib.Models;
 
 public class SingboxConfig
@@ -6,6 +8,7 @@ public class SingboxConfig
     public Dns4Sbox? dns { get; set; }
     public List<Inbound4Sbox> inbounds { get; set; }
     public List<Outbound4Sbox> outbounds { get; set; }
+    public List<Endpoints4Sbox>? endpoints { get; set; }
     public Route4Sbox route { get; set; }
     public Experimental4Sbox? experimental { get; set; }
 }
@@ -37,6 +40,7 @@ public class Route4Sbox
     public bool? auto_detect_interface { get; set; }
     public List<Rule4Sbox> rules { get; set; }
     public List<Ruleset4Sbox>? rule_set { get; set; }
+    public string? final { get; set; }
 }
 
 [Serializable]
@@ -67,6 +71,9 @@ public class Rule4Sbox
     public List<string>? process_name { get; set; }
     public List<string>? rule_set { get; set; }
     public List<Rule4Sbox>? rules { get; set; }
+    public string? action { get; set; }
+    public string? strategy { get; set; }
+    public List<string>? sniffer { get; set; }
 }
 
 [Serializable]
@@ -76,7 +83,6 @@ public class Inbound4Sbox
     public string tag { get; set; }
     public string listen { get; set; }
     public int? listen_port { get; set; }
-    public string? domain_strategy { get; set; }
     public string interface_name { get; set; }
     public List<string>? address { get; set; }
     public int? mtu { get; set; }
@@ -84,8 +90,6 @@ public class Inbound4Sbox
     public bool? strict_route { get; set; }
     public bool? endpoint_independent_nat { get; set; }
     public string? stack { get; set; }
-    public bool? sniff { get; set; }
-    public bool? sniff_override_destination { get; set; }
     public List<User4Sbox> users { get; set; }
 }
 
@@ -121,11 +125,6 @@ public class Outbound4Sbox
     public string? version { get; set; }
     public string? network { get; set; }
     public string? packet_encoding { get; set; }
-    public List<string>? local_address { get; set; }
-    public string? private_key { get; set; }
-    public string? peer_public_key { get; set; }
-    public List<int>? reserved { get; set; }
-    public int? mtu { get; set; }
     public string? plugin { get; set; }
     public string? plugin_opts { get; set; }
     public Tls4Sbox? tls { get; set; }
@@ -134,6 +133,35 @@ public class Outbound4Sbox
     public HyObfs4Sbox? obfs { get; set; }
     public List<string>? outbounds { get; set; }
     public bool? interrupt_exist_connections { get; set; }
+    public Rule4Sbox? domain_resolver { get; set; }
+}
+
+public class Endpoints4Sbox
+{
+    public string type { get; set; }
+    public string tag { get; set; }
+    public bool? system { get; set; }
+    public string? name { get; set; }
+    public int? mtu { get; set; }
+    public List<string> address { get; set; }
+    public string private_key { get; set; }
+    public int listen_port { get; set; }
+    public string? udp_timeout { get; set; }
+    public int? workers { get; set; }
+    public List<Peer4Sbox> peers { get; set; }
+    public string? detour { get; set; }
+    public Rule4Sbox? domain_resolver { get; set; }
+}
+
+public class Peer4Sbox
+{
+    public string address { get; set; }
+    public int port { get; set; }
+    public string public_key { get; set; }
+    public string? pre_shared_key { get; set; }
+    public List<string> allowed_ips { get; set; }
+    public int? persistent_keepalive_interval { get; set; }
+    public List<int> reserved { get; set; }
 }
 
 public class Tls4Sbox
@@ -194,12 +222,18 @@ public class HyObfs4Sbox
 public class Server4Sbox
 {
     public string? tag { get; set; }
+    public string? detour { get; set; }
+    public string? client_subnet { get; set; }
+    public string? type { get; set; }
+    public string? server { get; set; }
+    public string? server_resolver { get; set; }
+    [JsonPropertyName("interface")] public string? Interface { get; set; }
+    // Deprecated
     public string? address { get; set; }
     public string? address_resolver { get; set; }
     public string? address_strategy { get; set; }
     public string? strategy { get; set; }
-    public string? detour { get; set; }
-    public string? client_subnet { get; set; }
+    // Deprecated End
 }
 
 public class Experimental4Sbox
