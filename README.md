@@ -8,7 +8,7 @@ A GUI client for Windows, Linux and mac O S, support [Xray](https://github.com/X
 [![Chat on Telegram](https://img.shields.io/badge/Chat%20on-Telegram-brightgreen.svg)](https://t.me/v2rayn)
 
 
-## How to use
+## How to u se
 
 Read the [Wiki](https://github.com/2dust/v2rayN/wiki) for details.
 
