@@ -8,7 +8,7 @@ A GUI client for fccWindows, Linux and mac O S, support [Xray](https://github.co
 [![Chat on Telegram](https://img.shields.io/badge/Chat%20on-Telegram-brightgreen.svg)](https://t.me/v2rayn)
 
 
-## How to u se
+## H ow to u se
 
 Read the [Wiki](https://github.com/2dust/v2rayN/wiki) for details.
 
